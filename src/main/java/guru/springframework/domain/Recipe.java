@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -21,6 +23,10 @@ public class Recipe {
     private String source;
     private String url;
     private String directions;
+
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe") // @cascade: allows Recipe class to own (parent) the Ingredients
+    private Set<Ingredient> ingredients = new HashSet<>();
     //todo: add difficulty
 
     @Lob //enables large object field
