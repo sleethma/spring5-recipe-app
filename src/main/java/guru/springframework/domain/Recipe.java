@@ -1,5 +1,6 @@
 package guru.springframework.domain;
 
+import guru.springframework.enums.Difficulty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,13 +26,21 @@ public class Recipe {
     private String directions;
 
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe") // @cascade: allows Recipe class to own (parent) the Ingredients
-    private Set<Ingredient> ingredients = new HashSet<>();
-    //todo: add difficulty
-
     @Lob //enables large object field
     private Byte[] images;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe") // @cascade: allows Recipe class to own (parent) the Ingredients
+    private Set<Ingredient> ingredients = new HashSet<>();
+
     @OneToOne(cascade = CascadeType.ALL)
     private Notes notes;
+
+    @ManyToMany
+    @JoinTable(name = "recipe_category",
+            joinColumns = @JoinColumn(name = "recipe_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
+    private Set<Category> categories;
+
+    @Enumerated(value = EnumType.STRING)
+    private Difficulty difficulty;
 }

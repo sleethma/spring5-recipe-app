@@ -5,24 +5,20 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
+import java.util.Set;
 
+@Entity
 @Slf4j
 @Getter
 @Setter
-@Entity
-public class Ingredient {
+public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String description;
-    private BigDecimal amount;
 
-    //unit of measure
-    @OneToOne(fetch = FetchType.EAGER)//@fetch not necessary as is default
-    private UnitOfMeasure unit;
+    @ManyToMany(mappedBy = "categories")
+    private Set<Recipe> recipes;
 
-    @ManyToOne
-    private Recipe recipe;
 }
