@@ -19,6 +19,18 @@ public class Ingredient {
     private String description;
     private BigDecimal amount;
 
+    public Ingredient(){
+
+    }
+
+    public Ingredient(String description, BigDecimal amount, UnitOfMeasure unit,Recipe recipe) {
+        this.id = id;
+        this.description = description;
+        this.amount = amount;
+        this.unit = unit;
+        this.recipe = recipe;
+    }
+
     //unit of measure
     @OneToOne(fetch = FetchType.EAGER)//@fetch not necessary as is default
     private UnitOfMeasure unit;
