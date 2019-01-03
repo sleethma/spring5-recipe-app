@@ -44,4 +44,14 @@ public class Recipe {
 
     @Enumerated(value = EnumType.STRING)
     private Difficulty difficulty;
+
+    public void addIngredients(Ingredient ingredient) {
+        ingredient.setRecipe(this);
+        this.ingredients.add(ingredient);
+    }
+
+    public void addNote(Notes notes) {
+        this.notes = notes;
+        notes.setRecipe(this);
+    }
 }

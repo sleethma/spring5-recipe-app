@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Getter
 @Slf4j
 @Component
 public class InitDataBootstrap implements ApplicationListener<ContextRefreshedEvent>{
@@ -104,17 +103,17 @@ public class InitDataBootstrap implements ApplicationListener<ContextRefreshedEv
         tacoNotes.setRecipeNotes("Spicy grilled chicken tacos! Quick marinade, then grill. Ready in about 30 minutes. " +
                 "Great for a quick weeknight dinner, backyard cookouts, and tailgate parties.\n");
         tacoNotes.setRecipe(grilledChickTacos);
-        grilledChickTacos.setNotes(tacoNotes);
+        grilledChickTacos.addNote(tacoNotes);
 
         //create ingredients
-        grilledChickTacos.getIngredients().add(new Ingredient("Ancho Chili Powder", new BigDecimal(2),tbspU,grilledChickTacos ));
-        grilledChickTacos.getIngredients().add(new Ingredient("Dried Oregano", new BigDecimal(1),tspnU, grilledChickTacos ));
-        grilledChickTacos.getIngredients().add(new Ingredient("Dried Cumin", new BigDecimal(1),tbspU, grilledChickTacos));
-        grilledChickTacos.getIngredients().add(new Ingredient("Sugar", new BigDecimal(1),tspnU, grilledChickTacos));
-        grilledChickTacos.getIngredients().add(new Ingredient("Salt", new BigDecimal(0.5),tspnU, grilledChickTacos));
-        grilledChickTacos.getIngredients().add(new Ingredient("Clove Garlic", new BigDecimal(1),eachU, grilledChickTacos));
-        grilledChickTacos.getIngredients().add(new Ingredient("Orange Zest", new BigDecimal(1),tbspU, grilledChickTacos));
-        grilledChickTacos.getIngredients().add(new Ingredient("Chicken Thighs", new BigDecimal(5),eachU, grilledChickTacos));
+        grilledChickTacos.addIngredients(new Ingredient("Ancho Chili Powder", new BigDecimal(2),tbspU,grilledChickTacos ));
+        grilledChickTacos.addIngredients(new Ingredient("Dried Oregano", new BigDecimal(1),tspnU, grilledChickTacos ));
+        grilledChickTacos.addIngredients(new Ingredient("Dried Cumin", new BigDecimal(1),tbspU, grilledChickTacos));
+        grilledChickTacos.addIngredients(new Ingredient("Sugar", new BigDecimal(1),tspnU, grilledChickTacos));
+        grilledChickTacos.addIngredients(new Ingredient("Salt", new BigDecimal(0.5),tspnU, grilledChickTacos));
+        grilledChickTacos.addIngredients(new Ingredient("Clove Garlic", new BigDecimal(1),eachU, grilledChickTacos));
+        grilledChickTacos.addIngredients(new Ingredient("Orange Zest", new BigDecimal(1),tbspU, grilledChickTacos));
+        grilledChickTacos.addIngredients(new Ingredient("Chicken Thighs", new BigDecimal(5),eachU, grilledChickTacos));
 
         grilledChickTacos.getCategories().add(mexicanCat);
 
