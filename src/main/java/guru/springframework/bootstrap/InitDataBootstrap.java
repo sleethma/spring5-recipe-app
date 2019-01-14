@@ -5,7 +5,6 @@ import guru.springframework.enums.Difficulty;
 import guru.springframework.repos.CategoryRepo;
 import guru.springframework.repos.RecipeRepo;
 import guru.springframework.repos.UnitOfMeasureRepo;
-import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -82,8 +81,13 @@ public class InitDataBootstrap implements ApplicationListener<ContextRefreshedEv
         grilledChickTacos.setDescription("Spicy Grilled Tacos");
         grilledChickTacos.setCookTime(9);
         grilledChickTacos.setPrepTime(20);
+        grilledChickTacos.setPrepTime(30);
+        grilledChickTacos.setSource("Yummy Sources");
+        grilledChickTacos.setServings(4);
+        grilledChickTacos.setUrl("https://www.simplyrecipes.com/recipes/grilled-chicken-tacos/");
         grilledChickTacos.setDifficulty(Difficulty.MEDIUM);
-        grilledChickTacos.setDirections("1 Prepare a gas or charcoal grill for medium-high, direct heat.\n" +
+        grilledChickTacos.setDirections("1 Prepare a gas or charcoal grill for " +
+                "   medium-high, direct heat.\n" +
                 "\n" +
                 "2 Make the marinade and coat the chicken: In a large bowl, stir together the chili powder, oregano, cumin, sugar, salt, garlic and orange zest. Stir in the orange juice and olive oil to make a loose paste. Add the chicken to the bowl and toss to coat all over.\n" +
                 "\n" +
@@ -136,6 +140,10 @@ public class InitDataBootstrap implements ApplicationListener<ContextRefreshedEv
                 "Chilling tomatoes hurts their flavor, so if you want to add chopped tomato to your guacamole, add it just before serving.");
         guacamole.setDescription("A Creamy and Delicious Guacamole");
         guacamole.setCookTime(10);
+        guacamole.setPrepTime(30);
+        guacamole.setServings(4);
+        guacamole.setSource("Yummy Sources");
+        guacamole.setUrl("https://www.simplyrecipes.com/recipes/perfect_guacamole/");
         guacamole.getCategories().add(mexicanCat);
         guacamole.getIngredients().add(new Ingredient("ripe avacados", new BigDecimal(2),eachU , guacamole));
         guacamole.getIngredients().add(new Ingredient("Kosher Salt", new BigDecimal(0.5),tspnU, guacamole));

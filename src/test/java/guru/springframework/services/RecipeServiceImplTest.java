@@ -1,5 +1,7 @@
 package guru.springframework.services;
 
+import guru.springframework.converters.RecipeCommandToRecipeObj;
+import guru.springframework.converters.RecipeObjToRecipeCommand;
 import guru.springframework.domain.Recipe;
 import guru.springframework.repos.RecipeRepo;
 import org.junit.Before;
@@ -9,11 +11,11 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.*;
 
 public class RecipeServiceImplTest {
 
@@ -21,12 +23,16 @@ public class RecipeServiceImplTest {
 
     @Mock
     RecipeRepo recipeRepo;
+    @Mock
+    RecipeCommandToRecipeObj converterToRecipeObj;
+    @Mock
+    RecipeObjToRecipeCommand converterToRecipeCommand;
 
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        recipeService = new RecipeServiceImpl(recipeRepo);
+        recipeService = new RecipeServiceImpl(recipeRepo, converterToRecipeObj, converterToRecipeCommand);
     }
 
     @Test
@@ -44,5 +50,20 @@ public class RecipeServiceImplTest {
         assertEquals(recipes.size(),1);
         verify(recipeRepo, times(1)).findAll();
 
+    }
+
+    @Test
+    public void getRecipeByIdTest() throws Exception {
+        Recipe recipe = new Recipe();
+        recipe.setId(1L);
+        Optional<Recipe> recipeOptional = Optional.of(recipe);
+
+        when(recipeRepo.findById(anyLong())).thenReturn(recipeOptional);
+
+        Recipe recipeReturned = recipeService.findById(1L);
+
+        assertNotNull("Null recipe returned", recipeReturned);
+        verify(recipeRepo, times(1)).findById(anyLong());
+        verify(recipeRepo, never()).findAll();
     }
 }

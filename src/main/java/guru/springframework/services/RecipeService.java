@@ -1,5 +1,6 @@
 package guru.springframework.services;
 
+import guru.springframework.command_objs.RecipeCommand;
 import guru.springframework.domain.Recipe;
 import guru.springframework.repos.RecipeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,4 +14,8 @@ import java.util.Set;
 
 public interface RecipeService {
     Set<Recipe> getRecipes();
+
+    Recipe findById(Long id);
+
+    RecipeCommand saveRecipeCommand(RecipeCommand recipeCommand);
 }
