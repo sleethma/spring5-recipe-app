@@ -15,4 +15,5 @@ public class UnitOfMeasureCommand {
 
         private Long id;
         private String unit;
+        private String description;
 }

@@ -1,5 +1,6 @@
 package guru.springframework.services;
 
+import guru.springframework.command_objs.RecipeCommand;
 import guru.springframework.converters.RecipeCommandToRecipeObj;
 import guru.springframework.converters.RecipeObjToRecipeCommand;
 import guru.springframework.domain.Recipe;
@@ -65,5 +66,13 @@ public class RecipeServiceImplTest {
         assertNotNull("Null recipe returned", recipeReturned);
         verify(recipeRepo, times(1)).findById(anyLong());
         verify(recipeRepo, never()).findAll();
+    }
+
+    @Test
+    public void deleteRecipeById(){
+        Long recipeId = 1L;
+        recipeService.deleteRecipeById(recipeId);
+
+        verify(recipeRepo, times(1)).deleteById(recipeId);
     }
 }
