@@ -11,9 +11,14 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+
+import java.util.Optional;
+
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -28,7 +33,7 @@ public class RecipeServiceImplIT {
     @Autowired
     RecipeService recipeService;
 
-    Long recipeId = 3L;
+    Long recipeId = 1L;
 
     @Before
     public void setUp() throws Exception {
@@ -46,10 +51,14 @@ public class RecipeServiceImplIT {
     @Test
     public void findById() {
         //given
-
+        Recipe recipe = new Recipe();
+        recipe.setId(recipeId);
+        Optional<Recipe> optionalRecipe = Optional.of(recipe);
         //when
+        Recipe returnedRecipe = recipeService.findById(recipeId);
 
         //then
+        assertEquals(recipeId, returnedRecipe.getId());
     }
 
     @Test

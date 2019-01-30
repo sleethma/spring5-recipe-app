@@ -1,19 +1,13 @@
 package guru.springframework.controllers;
 
-import guru.springframework.domain.Category;
-import guru.springframework.domain.Recipe;
-import guru.springframework.domain.UnitOfMeasure;
-import guru.springframework.repos.CategoryRepo;
-import guru.springframework.repos.RecipeRepo;
-import guru.springframework.repos.UnitOfMeasureRepo;
+import guru.springframework.services.IngredientService;
 import guru.springframework.services.RecipeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.Optional;
-import java.util.Set;
 
 /**
  * Created by jt on 6/1/17.
@@ -23,15 +17,16 @@ import java.util.Set;
 public class IndexController {
 
     private RecipeService recipeService;
+    private IngredientService ingredientService;
 
-    public IndexController(RecipeService recipeService) {
+    public IndexController(RecipeService recipeService, IngredientService ingredientService) {
         this.recipeService = recipeService;
+        this.ingredientService = ingredientService;
     }
 
     @RequestMapping({"", "/", "/index"})
-    public String getIndexPage(Model model){
-        model.addAttribute("recipes" , recipeService.getRecipes());
+    public String getIndexPage(Model model) {
+        model.addAttribute("recipes", recipeService.getRecipes());
         return "index";
     }
-
 }

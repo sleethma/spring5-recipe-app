@@ -3,7 +3,9 @@ package guru.springframework.services;
 import guru.springframework.command_objs.RecipeCommand;
 import guru.springframework.converters.RecipeCommandToRecipeObj;
 import guru.springframework.converters.RecipeObjToRecipeCommand;
+import guru.springframework.domain.Ingredient;
 import guru.springframework.domain.Recipe;
+import guru.springframework.domain.UnitOfMeasure;
 import guru.springframework.repos.RecipeRepo;
 import org.junit.Before;
 import org.junit.Test;
@@ -28,6 +30,8 @@ public class RecipeServiceImplTest {
     RecipeCommandToRecipeObj converterToRecipeObj;
     @Mock
     RecipeObjToRecipeCommand converterToRecipeCommand;
+
+    Long recipeId = 1L;
 
 
     @Before
@@ -70,9 +74,43 @@ public class RecipeServiceImplTest {
 
     @Test
     public void deleteRecipeById(){
-        Long recipeId = 1L;
+
         recipeService.deleteRecipeById(recipeId);
 
         verify(recipeRepo, times(1)).deleteById(recipeId);
+    }
+
+    @Test
+    public void findRecipeCommandByIdTest(){
+        //given
+        RecipeCommand recipeCommand = new RecipeCommand();
+        recipeCommand.setId(recipeId);
+        //when
+        when(converterToRecipeCommand.convert(any())).thenReturn(recipeCommand);
+        RecipeCommand returnedRecipeCommand = recipeService.findRecipeCommandById(recipeId);
+        //then
+        assertEquals(recipeId, returnedRecipeCommand.getId());
+    }
+
+    @Test
+    public void getIngredientsTest(){
+        //given
+        Recipe recipe = new Recipe();
+        recipe.setId(recipeId);
+        Ingredient ingredient = new Ingredient();
+        ingredient.setId(2L);
+        recipe.addIngredients(ingredient);
+        Ingredient ingredient2 = new Ingredient();
+        ingredient2.setId(3L);
+        recipe.addIngredients(ingredient2);
+        HashSet recipeSet = new HashSet<>();
+        recipeSet.add(recipe);
+
+        //when
+        when(recipeService.getRecipes()).thenReturn(recipeSet);
+        int size = recipeService.getRecipes().iterator().next().getIngredients().size();
+
+        //then
+        assertEquals(size,2);
     }
 }
