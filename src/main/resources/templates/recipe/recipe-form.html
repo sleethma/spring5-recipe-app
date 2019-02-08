@@ -38,6 +38,7 @@
                                     <input type="text" class="form-control" th:field="*{description}"/>
                                 </div>
                             </div>
+
                             <div class="row">
                                 <div class="col-md-3 form-group">
                                     <label>Categories:</label>
@@ -68,10 +69,11 @@
                                 </div>
                                 <div class="col-md-3 form-group">
                                     <label>Difficulty:</label>
-                                    <select class="form-control">
-                                        <option>Easy</option>
-                                        <option>Medium</option>
-                                        <option>Hard</option>
+                                    <select class="form-control" th:field="*{difficulty}">
+                                        <option th:each="difficultyProperty: ${T(guru.springframework.enums.Difficulty).values()}"
+                                                th:value="${difficultyProperty.name()}"
+                                                th:text="${difficultyProperty.name()}"
+                                        >Easy</option>
                                     </select>
                                 </div>
                             </div>
