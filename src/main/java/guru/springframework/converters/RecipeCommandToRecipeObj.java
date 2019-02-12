@@ -1,19 +1,11 @@
 package guru.springframework.converters;
 
-import guru.springframework.command_objs.NotesCommand;
 import guru.springframework.command_objs.RecipeCommand;
-import guru.springframework.domain.Category;
-import guru.springframework.domain.Ingredient;
-import guru.springframework.domain.Notes;
 import guru.springframework.domain.Recipe;
-import guru.springframework.enums.Difficulty;
 import lombok.Synchronized;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
-
-import java.util.HashSet;
-import java.util.Set;
 
 @Component
 public class RecipeCommandToRecipeObj implements Converter<RecipeCommand, Recipe> {
@@ -46,7 +38,7 @@ public class RecipeCommandToRecipeObj implements Converter<RecipeCommand, Recipe
         convertedRecipeObj.setSource(recipeCommand.getSource());
         convertedRecipeObj.setUrl(recipeCommand.getUrl());
         convertedRecipeObj.setDirections(recipeCommand.getDirections());
-        convertedRecipeObj.setImages(recipeCommand.getImages());
+        convertedRecipeObj.setImage(recipeCommand.getImages());
         convertedRecipeObj.setDifficulty(recipeCommand.getDifficulty());
 
         //convert

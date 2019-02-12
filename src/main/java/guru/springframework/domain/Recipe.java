@@ -28,7 +28,7 @@ public class Recipe {
     private String directions;
 
     @Lob //enables large object field
-    private Byte[] images;
+    private Byte[] image;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe") // @cascade: allows Recipe class to own (parent) the Ingredients
     private Set<Ingredient> ingredients = new HashSet<>();

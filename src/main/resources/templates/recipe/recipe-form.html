@@ -29,13 +29,19 @@
                 <div class="pannel-group">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <h1 class="panel-title">Edit Recipe Information</h1>
+                            <font class="panel-title">Edit Recipe Information</font>
+                            <a class="btn btn-default" href="#" style="float:right;margin=0px;"
+                               th:href="@{'/recipe/' + ${recipe.id} + '/get-image'}" role="button">Change Image</a>
                         </div>
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-3 form-group">
                                     <label>Recipe Description:</label>
                                     <input type="text" class="form-control" th:field="*{description}"/>
+                                </div>
+                                <div class="col-md-8">
+                                    <img src="../../static/images/guac_img.jpg"
+                                         th:src="@{static/images/guac_img.jpg}" height="200" width="200" style="float:right;border-radius:15px;"/>
                                 </div>
                             </div>
 
