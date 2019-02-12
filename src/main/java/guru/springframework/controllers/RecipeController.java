@@ -3,15 +3,22 @@ package guru.springframework.controllers;
 import guru.springframework.command_objs.RecipeCommand;
 import guru.springframework.services.RecipeService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 @Slf4j
 @Controller
 public class RecipeController {
 
     RecipeService recipeService;
+
     public RecipeController(RecipeService recipeService) {
         this.recipeService = recipeService;
     }
@@ -30,13 +37,13 @@ public class RecipeController {
 
     //update recipe
     @GetMapping("recipe/{id}/update")
-    public String updateRecipe(@PathVariable Long id, Model model){
+    public String updateRecipe(@PathVariable Long id, Model model) {
         model.addAttribute("recipe", recipeService.findRecipeCommandById(id));
         return "recipe/recipe-form";
     }
 
     @PostMapping(name = "/recipe")
-    public String saveRecipe(@ModelAttribute RecipeCommand recipeCommand){
+    public String saveRecipe(@ModelAttribute RecipeCommand recipeCommand) {
         RecipeCommand savedRecipeCommand = recipeService.saveRecipeCommand(recipeCommand);
         return "redirect:/recipe/" + savedRecipeCommand.getId() + "/show";
     }
@@ -47,5 +54,6 @@ public class RecipeController {
         log.debug("Deleted id#" + id);
         return "redirect:/";
     }
+
 
 }

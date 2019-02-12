@@ -28,7 +28,7 @@ public class RecipeObjToRecipeCommand implements Converter<Recipe, RecipeCommand
     public RecipeCommand convert(Recipe recipe) {
         if(recipe == null) return null;
 
-        RecipeCommand convertedRecipeCommand = new RecipeCommand();
+        final RecipeCommand convertedRecipeCommand = new RecipeCommand();
         convertedRecipeCommand.setId(recipe.getId());
         convertedRecipeCommand.setDescription(recipe.getDescription());
         convertedRecipeCommand.setPrepTime(recipe.getPrepTime());
@@ -37,7 +37,7 @@ public class RecipeObjToRecipeCommand implements Converter<Recipe, RecipeCommand
         convertedRecipeCommand.setSource(recipe.getSource());
         convertedRecipeCommand.setUrl(recipe.getUrl());
         convertedRecipeCommand.setDirections(recipe.getDirections());
-        convertedRecipeCommand.setImages(recipe.getImage());
+        convertedRecipeCommand.setImage(recipe.getImage());
         convertedRecipeCommand.setDifficulty(recipe.getDifficulty());
 
         //convert

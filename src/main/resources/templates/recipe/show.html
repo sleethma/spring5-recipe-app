@@ -31,12 +31,13 @@
                     </div>
 
                     <div class="panel-body">
+                        <div class="col-md-8">
+                            <img src="../../static/images/guac_img.jpg"
+                                 th:src="@{'/recipe/' + ${recipe.id} + '/recipeimage'}" height="200px" width="200px"
+                                 style="float:right;border-radius:15px;"/>
+                        </div>
                         <div class="row">
-                            <div class="col-md-8">
-                                <img src="../../static/images/guac_img.jpg"
-                                     th:href="@{static/images/guac_img.jpg}" height="200px" width="200px"
-                                     style="float:right;border-radius:15px;"/>
-                            </div>
+
                             <div class="col-md-3">
                                 <h5>Categories:</h5>
                             </div>
