@@ -6,6 +6,7 @@ import guru.springframework.converters.RecipeObjToRecipeCommand;
 import guru.springframework.domain.Ingredient;
 import guru.springframework.domain.Recipe;
 import guru.springframework.domain.UnitOfMeasure;
+import guru.springframework.exceptions.NotFoundException;
 import guru.springframework.repos.RecipeRepo;
 import org.junit.Before;
 import org.junit.Test;
@@ -112,5 +113,15 @@ public class RecipeServiceImplTest {
 
         //then
         assertEquals(size,2);
+    }
+
+    @Test(expected = NotFoundException.class)
+    public void getRecipeIdNotFoundException(){
+        Optional<Recipe> recipeOptional = Optional.empty();
+        when(recipeRepo.findById(anyLong())).thenReturn(recipeOptional);
+
+        Recipe recipeReturned = recipeService.findById(3L);
+
+        //should throw exception
     }
 }
