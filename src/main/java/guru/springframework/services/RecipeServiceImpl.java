@@ -38,7 +38,9 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     public Recipe findById(Long id) {
         Optional<Recipe> recipe = recipeRepo.findById(id);
-        if(!recipe.isPresent()) throw new NotFoundException("recipe not found by id!");
+        if(!recipe.isPresent()) {
+            throw new NotFoundException("recipe not found by id for id value " + id.toString());
+        }
         return recipe.orElse(null);
     }
 

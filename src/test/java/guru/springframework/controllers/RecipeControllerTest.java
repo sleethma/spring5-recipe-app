@@ -2,6 +2,7 @@ package guru.springframework.controllers;
 
 import guru.springframework.command_objs.RecipeCommand;
 import guru.springframework.domain.Recipe;
+import guru.springframework.exceptions.NotFoundException;
 import guru.springframework.services.RecipeService;
 import jdk.jfr.ContentType;
 import org.junit.Before;
@@ -71,7 +72,7 @@ public class RecipeControllerTest {
     }
 
     @Test
-    public void createNewRecipeForm() throws Exception{
+    public void createNewRecipeForm() throws Exception {
         mockMvc.perform(get("/recipe/create-new"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("recipe/recipe-form"))
@@ -79,7 +80,7 @@ public class RecipeControllerTest {
     }
 
     @Test
-    public void postNewRecipe() throws Exception{
+    public void postNewRecipe() throws Exception {
         RecipeCommand recipeCommand = new RecipeCommand();
         recipeCommand.setId(recipeId);
 
@@ -108,15 +109,28 @@ public class RecipeControllerTest {
     }
 
     @Test
-    public void deleteRecipe() throws Exception{
+    public void deleteRecipe() throws Exception {
 
         mockMvc.perform(get("/recipe/1/delete"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/"));
-
         verify(recipeService, times(1)).deleteRecipeById(anyLong());
 
     }
 
 
+    @Test
+    public void showErrorPage() throws Exception{
+        when(recipeService.findById(anyLong())).thenThrow(NotFoundException.class);
+        mockMvc.perform(get("/recipe/1/show"))
+                .andExpect(view().name("404error"))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    public void showBadRequestErrorPage() throws Exception{
+        mockMvc.perform(get("/recipe/asdf/show"))
+                .andExpect(status().isBadRequest())
+                .andExpect(view().name("400error"));
+    }
 }
