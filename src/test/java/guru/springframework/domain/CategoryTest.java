@@ -32,8 +32,4 @@ public class CategoryTest {
         assertEquals(testDescription, category.getDescription());
     }
 
-    @Test
-    @Ignore
-    public void getRecipes() {
-    }
 }

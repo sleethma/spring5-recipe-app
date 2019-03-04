@@ -119,7 +119,6 @@ public class IngredientControllerTest {
 
     }
 
-    @Ignore
     @Test
     public void deleteIngredient() throws Exception {
         IngredientCommand ingredientCommand = new IngredientCommand();
